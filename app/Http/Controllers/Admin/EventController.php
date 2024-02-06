@@ -26,7 +26,7 @@ class EventController extends Controller
             'city'=>'required|max:20',
             'address'=>'required|max:100',
             'artist'=>'required',
-            'data'=>'required',
+            'date'=>'required',
             'tickets'=>'required',
             'poster'=>'required',
             'price'=>'required',
@@ -37,11 +37,11 @@ class EventController extends Controller
             'location.required'=>'Requisito Necessario',
             'location.max'=>'Numero caratteri consentiti superato',
             'city.required'=>'Requisito Necessario',
-            'city.min'=>'Numero caratteri minimi non raggiunto',
+            'city.max'=>'Numero caratteri consentiti superato',
             'address.required'=>'Requisito Necessario',
-            'address.max'=>'Numero caratteri minimi non raggiunto',
+            'address.max'=>'Numero caratteri consentiti superato',
             'artist.required'=>'Requisito Necessario',
-            'data.required'=>'Requisito Necessario',
+            'date.required'=>'Requisito Necessario',
             'tickets.required'=>'Requisito Necessario',
             'poster.required'=>'Requisito Necessario',
             'price.required'=>'Requisito Necessario',
@@ -72,7 +72,7 @@ class EventController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreEventRequest $request , String $id)
+    public function store(StoreEventRequest $request)
     {
         $data = $request->all();
         $valid_data=$this->validation($data);
@@ -80,7 +80,7 @@ class EventController extends Controller
         $newEvent->fill($valid_data); //prende tutti i dati dalla richiesta e li usa per popolare ma prima si validano i dati
         $newEvent->save();
 
-        return redirect()->route('admin.events.show', $newEvent->id);
+        return redirect()->route('admin.events.index'); //agg id per non ripetere l'agg dell'ogg
     }
 
     /**
@@ -114,11 +114,10 @@ class EventController extends Controller
      * @param  \App\Models\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateEventRequest $request)
+    public function update(UpdateEventRequest $request , Event $event)
     {
-        $data = $request->except('_token' , '_method');
-        $valid_data=$this->validation($data);
-        $event= Event::all();
+        $data = $request->all();
+        $valid_data=$this->validation($data); 
         $event->update($valid_data);  
         return redirect()->route('admin.events.index');
     }
@@ -131,6 +130,7 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
-        //
+        $event->delete();
+        return redirect()->route("admin.events.index");
     }
 }
