@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller; // Controller di base da importare
 use Illuminate\Http\Request;
 use App\Models\Event;
+use App\Models\Tag;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
 
@@ -63,7 +64,8 @@ class EventController extends Controller
      */
     public function create()
     {
-        return view("admin.events.create");
+        $tags = Tag::all();
+        return view("admin.events.create" , compact("tags"));
     }
 
     /**

@@ -14,6 +14,13 @@
          <p> {{ $eventIt->location }}</p>
          <p> {{ $eventIt->city }}</p>
          <p> {{ $eventIt->address }}</p>
+
+         @foreach($eventIt->tags as $tag)
+         
+          <p> {{$tag->name}} </p>
+         
+         @endforeach
+         
          <div class="d-flex justify-content-between">
           <div>
             <p> {{ $eventIt->price }}</p>

@@ -119,15 +119,15 @@
     </div>
         
 
-    {{-- <select name="technologies[]" id="technologies" class="form-select" multiple aria-label="Multiple select example"> --}}
+    <select name="tags[]" id="tags" class="form-select" multiple aria-label="Multiple select example">
         {{-- <option selected>Open this select menu</option> --}}
-          {{-- @foreach($technologies as $technology)
-            <option value="{{$technology->id}}">{{$technology->name}}</option>
-           @endforeach --}}
+          @foreach($tags as $tag)
+            <option value="{{$tag->id}}">{{$tag->name}}</option>
+           @endforeach
         {{-- <option value="1">name1</option>
         <option value="2">name2</option>
         <option value="3">name3</option> --}}
-    {{-- </select> --}}
+    </select>
  
         <div class="col-12 text-center">  
         <button type="submit" class="btn btn-primary">Submit</button>

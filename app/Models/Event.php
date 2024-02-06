@@ -20,4 +20,8 @@ class Event extends Model
         'poster',
         'price',
     ];
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
 }
