@@ -1,1 +1,23 @@
-@import '~bootstrap/scss/bootstrap'
+@import '~bootstrap/scss/bootstrap';
+body{
+    background-image: url('https://wallpaperbat.com/img/704147-website-wallpaper-top-free-website-background.png');
+    //background-color: rgb(67, 98, 99);
+}
+.red{
+    color: rgb(123, 18, 18);
+}
+.grey{
+    color: slategray;
+}
+.mycard{
+    width: calc((100% / 3) - 2rem);
+    margin: 1rem;
+    padding: 1rem;
+}
+.mytext{
+    font-family: "Cinzel", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  color: cadetblue;
+}
