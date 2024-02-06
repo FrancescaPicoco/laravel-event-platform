@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller; // Controller di base da importare
+use Illuminate\Http\Request;
 use App\Models\Event;
+use App\Http\Requests\StoreEventRequest;
+use App\Http\Requests\UpdateEventRequest;
 
 use Illuminate\Support\Facades\Validator;
 
@@ -20,9 +22,9 @@ class EventController extends Controller
      public function validation($data){  //metodo a parte per la validation
         $validated = Validator::make($data,[    //accetta 3 argomenti dato da validare, primo array con regole e secondo array con messaggi
             'name'=>'required|max:50',
-            'location'=>'required|max:20',
+            'location'=>'required|max:50',
             'city'=>'required|max:20',
-            'address'=>'required|max:50',
+            'address'=>'required|max:100',
             'artist'=>'required',
             'data'=>'required',
             'tickets'=>'required',
@@ -37,7 +39,7 @@ class EventController extends Controller
             'city.required'=>'Requisito Necessario',
             'city.min'=>'Numero caratteri minimi non raggiunto',
             'address.required'=>'Requisito Necessario',
-            'address.min'=>'Numero caratteri minimi non raggiunto',
+            'address.max'=>'Numero caratteri minimi non raggiunto',
             'artist.required'=>'Requisito Necessario',
             'data.required'=>'Requisito Necessario',
             'tickets.required'=>'Requisito Necessario',
@@ -70,7 +72,7 @@ class EventController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreEventRequest $request , String $id)
     {
         $data = $request->all();
         $valid_data=$this->validation($data);
@@ -78,7 +80,7 @@ class EventController extends Controller
         $newEvent->fill($valid_data); //prende tutti i dati dalla richiesta e li usa per popolare ma prima si validano i dati
         $newEvent->save();
 
-        return redirect()->route('admin.event.show', $newEvent->id);
+        return redirect()->route('admin.events.show', $newEvent->id);
     }
 
     /**
@@ -99,9 +101,10 @@ class EventController extends Controller
      * @param  \App\Models\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function edit(Event $event)
+    public function edit(String $id)
     {
-        //
+        $eventItem = Event::find($id);
+        return view('admin.events.edit', compact("eventItem"));
     }
 
     /**
@@ -111,9 +114,13 @@ class EventController extends Controller
      * @param  \App\Models\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Event $event)
+    public function update(UpdateEventRequest $request)
     {
-        //
+        $data = $request->except('_token' , '_method');
+        $valid_data=$this->validation($data);
+        $event= Event::all();
+        $event->update($valid_data);  
+        return redirect()->route('admin.events.index');
     }
 
     /**

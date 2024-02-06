@@ -15,6 +15,18 @@
               </div>
         </div>
      </div>
+
+     <div class="row">
+        <div class="col-6 offset-3">
+            <div class="mb-3">
+                <label for="artist" class="form-label">Artist</label>
+                <input type="text" class="form-control @error('artist') is-invalid @enderror" id="artist" name="artist" value="{{ old('artist')}} ">
+                @error('artist')
+                 <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+              </div>
+        </div>
+     </div>
         
     <div class="row">
         <div class="col-6 offset-3">
@@ -117,7 +129,7 @@
         <option value="3">name3</option> --}}
     {{-- </select> --}}
  
-        <div class="col text-center">  
+        <div class="col-12 text-center">  
         <button type="submit" class="btn btn-primary">Submit</button>
         </div>
         
