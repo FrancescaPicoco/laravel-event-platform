@@ -79,6 +79,7 @@ class EventController extends Controller
     {
         $data = $request->all();
         $valid_data=$this->validation($data);
+        $validated["user_id"] = Auth::id();
         $newEvent = new Event();
         $newEvent->fill($valid_data); //prende tutti i dati dalla richiesta e li usa per popolare ma prima si validano i dati
         $newEvent->save();

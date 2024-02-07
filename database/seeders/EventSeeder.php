@@ -13,12 +13,20 @@ class EventSeeder extends Seeder
      *
      * @return void
      */
-    public function run(): void
+    public function run($userTot = null): void
     {
+        //$userTot = 11;
         $eventArray = config("event");
         foreach($eventArray as $singleEvent)
         {
             $newEvent = new Event();
+
+            if ($userTot){
+                $newEvent->user_id = rand(1,$userTot);
+            }
+           
+
+            //$newEvent->user_id=rand(1,$userTot);
             $newEvent->name= $singleEvent['name'];
             $newEvent->location= $singleEvent['location'];
             $newEvent->city= $singleEvent['city'];

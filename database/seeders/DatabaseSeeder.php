@@ -14,14 +14,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        $userTot = $this->command->ask("quanti utenti");
+        $eventTot = $this->command->ask("quanti eventi");
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $this->callWith(UserSeeder::class, compact("userTot"));
+        $this->callWith(EventSeeder::class, compact("eventTot"));
+
         $this->call([
-            EventSeeder::class,
+            // UserSeeder::class,
+            // EventSeeder::class,
             TagSeeder::class,
         ]);
     }
