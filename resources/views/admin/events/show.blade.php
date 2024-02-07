@@ -11,6 +11,7 @@
             <p class="card-text"> {{ $eventItem->name }}</p>
             <p class="card-text"> {{ $eventItem->city }}</p>
             <p class="card-text"> {{ $eventItem->date }}</p>
+            <h5 class="card-text">{{$eventItem->users}}</h5>
         </p>
     </div>
   </div>

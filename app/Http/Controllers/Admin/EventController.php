@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller; // Controller di base da importare
 use Illuminate\Http\Request;
 use App\Models\Event;
 use App\Models\Tag;
+use App\Models\User;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
 
@@ -94,7 +95,8 @@ class EventController extends Controller
     public function show(String $id)
     {
         $eventItem = Event::find($id);
-        return view('admin.events.show', compact("eventItem"));
+        $users = User::all();
+        return view('admin.events.show', compact("eventItem" , "users"));
     }
 
     /**
