@@ -10,11 +10,17 @@ class EventController extends Controller
 {
     public function index(){
         $results = Event::all();
-        $data = [
-            "success" => true,
-            "results" => $results
-        ];
+         $data = [
+             "success" => true,
+             "results" => $results
+         ];
         return response()->json($data);
+        // return response()->json([
+        //     "success" => true,
+        //     "payload" => $results
+        // ]);
     }
+
+    
    
 }

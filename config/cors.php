@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => [env('APP_FRONTEND_URL', 'http://localhost5173')], //come sec arg sarebbe meglio www.ilmiosito.it
 
     'allowed_origins_patterns' => [],
 
