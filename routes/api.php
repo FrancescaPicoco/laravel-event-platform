@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 //use App\Models\Event;
-use App\Http\Controllers\Admin\EventController;
+use App\Http\Controllers\Api\EventController; 
 
 
 /*
@@ -28,3 +28,5 @@ Route::get("/prova", function () {
 });// solo di prova perche dovra restituire tutti gli eventi 
 
 Route::get("/events" , [EventController::class, "index"]);
+
+Route::get("events/{id}", [EventController::class,  "show"]);
