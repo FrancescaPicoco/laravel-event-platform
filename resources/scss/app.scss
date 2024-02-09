@@ -2,6 +2,10 @@
 body{
     background-image: url('https://png.pngtree.com/background/20230617/original/pngtree-low-poly-abstract-network-communication-background-in-3d-render-picture-image_3682642.jpg');
     background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100vh;
     //background-color: rgb(67, 98, 99);
 }
 .red{
